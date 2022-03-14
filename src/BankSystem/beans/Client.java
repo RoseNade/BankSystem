@@ -1,4 +1,9 @@
-package BankSystem;
+package BankSystem.beans;
+
+import BankSystem.Bank;
+import BankSystem.Log;
+import BankSystem.Logger;
+import BankSystem.exceptions.WithdrawException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,11 +73,11 @@ public abstract class Client {
     }
 
     public void fullReport() {
-        System.out.println(getIdClient());
-        System.out.println(getFullName());
-        System.out.println(getCommissionRate());
-        System.out.println(getInterestRate());
-        System.out.println(getClass());
+        System.out.println("Client's id: " + getIdClient());
+        System.out.println("Client' full name: " + getFullName());
+        System.out.println("Client's commission rate: " + getCommissionRate());
+        System.out.println("Client's interest rate: " + getInterestRate());
+        System.out.println("Type of client/class: " + getClass());
     }
 
     public abstract void draw();
@@ -90,11 +95,12 @@ public abstract class Client {
         }
     }
 
-    public void withdraw(Account account, double amount) {
+    public void withdraw(Account account, double amount) throws WithdrawException {
         // is it account.getID?
         if (accounts.contains(account)) {
             if (amount + commission(amount) > account.getBalance()) {
-                System.out.println("No Overdraft");
+//                System.out.println("No Overdraft");
+                throw new WithdrawException(account.getAccountID(), account.getBalance(), amount);
             } else {
                 System.out.println("Withdraw Successfully");
                 account.setBalance(account.getBalance() - amount - commission(amount));
@@ -162,7 +168,7 @@ public abstract class Client {
 
         // check if this is the right solution
         for (Account acc : this.accounts) {
-            acc.setBalance(acc.getBalance() + (interestRate * acc.getBalance()));
+            acc.setBalance(acc.getBalance() + (acc.getBalance() * (interestRate / 100)));
             loggerActions("Interest rate applied", acc);
         }
     }

@@ -1,5 +1,7 @@
 package BankSystem;
 
+import BankSystem.beans.Client;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +10,16 @@ public class Bank {
     private final String name = "John Bryce Bank";
     private List<Client> clients = new ArrayList<>();
     private static double totalCommission;
-    private static Bank instance = new Bank();
+    private static Bank instance;
 
     private Bank() {
+        startAccountUpdater();
     }
 
     public static Bank getInstance() {
+        if (instance == null) {
+            instance = new Bank();
+        }
         return instance;
     }
 
@@ -76,8 +82,7 @@ public class Bank {
     }
 
     public void viewLogs() {
-        Logger logger = Logger.getInstance();
-        logger.display();
+        Logger.getInstance().display();
     }
 
     public double getFortune() {
@@ -86,7 +91,7 @@ public class Bank {
         for (Client client : clients) {
             if (client != null) {
                 result += client.getFortune();
-                totalCommission += client.getFortune() / 100 * client.commissionRate;
+                totalCommission += client.getFortune() / 100 * client.getCommissionRate();
             }
         }
         updateTotalCommission(totalCommission);
@@ -94,7 +99,8 @@ public class Bank {
     }
 
     public void startAccountUpdater() {
-        //TODO account updater method
+        Thread thread = new Thread(new AutoUpdater(clients));
+        thread.start();
     }
 
     public static void updateTotalCommission(double commission) {

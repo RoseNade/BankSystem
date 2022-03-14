@@ -1,4 +1,4 @@
-package BankSystem;
+package BankSystem.beans;
 
 public class GoldClient extends Client {
     public GoldClient(int idClient, String lastName, String firstName) {

@@ -1,4 +1,4 @@
-package BankSystem;
+package BankSystem.beans;
 
 public class PlatinumClient extends Client {
     public PlatinumClient(int idClient, String lastName, String firstName) {

@@ -1,4 +1,4 @@
-package BankSystem;
+package BankSystem.beans;
 
 import java.util.Objects;
 

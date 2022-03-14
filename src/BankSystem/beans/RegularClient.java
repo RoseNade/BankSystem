@@ -1,4 +1,4 @@
-package BankSystem;
+package BankSystem.beans;
 
 public class RegularClient extends Client {
 
