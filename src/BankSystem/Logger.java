@@ -30,9 +30,13 @@ public class Logger {
 
     public void display() {
         System.out.println("----------------- Logger -----------------");
-        for (Log log : logs) {
-            System.out.println(log);
+        for (int i = 0; i < logs.size(); i++) {
+            System.out.println(logs.get(i));
         }
+        // iterator for some reason crashes it?
+//        for (Log log : logs) {
+//            System.out.println(log);
+//        }
 //        for (Iterator<Log> iterator = logs.iterator(); iterator.hasNext(); ) {
 //            Log log = iterator.next();
 //            System.out.println(log);

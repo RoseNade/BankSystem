@@ -13,12 +13,12 @@ public class AutoUpdater implements Runnable {
 
     public void run() {
         while (true) {
-//            for (int i = 0; i < clients.size(); i++) {
-//                clients.get(i).autoUpdateAccount();
-//            }
-            for (Client client : clients) {
-                client.autoUpdateAccount();
+            for (int i = 0; i < clients.size(); i++) {
+                clients.get(i).autoUpdateAccount();
             }
+//            for (Client client : clients) {
+//                client.autoUpdateAccount();
+//            }
             try {
                 Thread.sleep(1000 * 10);
             } catch (InterruptedException e) {
